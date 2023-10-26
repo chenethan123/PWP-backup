@@ -1,0 +1,24 @@
+from gpiozero import Device, Robot
+
+mdm=Robot((1,2),(3,4)) #Pin Numbers of Motors
+
+#Below this is code that would go into corresponding button presses
+
+#forward button press
+#mdm.stop()
+#mdm.forward()
+
+#left button press
+#mdm.stop()
+#mdm.left()
+
+#right button press
+#mdm.stop()
+#mdm.right()
+
+#reverse button press
+#mdm.stop()
+#mdm.backward()
+
+#stop button press
+#mdm.stop()
