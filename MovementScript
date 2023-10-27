@@ -4,6 +4,9 @@ mdm=Robot((1,2),(3,4)) #Pin Numbers of Motors
 
 #Below this is code that would go into corresponding button presses
 
+#Stop before movement to prevent any potential double-movement issues
+#Double-Movement defined as attempting to continue another movement while following the new movement
+
 #forward button press
 #mdm.stop()
 #mdm.forward()
