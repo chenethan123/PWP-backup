@@ -1,23 +1,25 @@
-import tkinter as tk
-from login_gui import in_login_gui
-from create_user_gui import in_create_user_gui
-import database_operations as db_ops 
-import requests
+from gpiozero import Robot
+#Below this is code that would go into corresponding button presses
 
-def in_main_gui():
-  #set up the database
-  db_ops.setup_database()
-  #create the main tkinter window
-  root = tk.Tk()
-  root.title("Login and Create User")
+#forward button press
+#mdm.stop()
+#mdm.forward()
 
-  in_login_gui(root)
-  in_create_user_gui(root)
-  #start the tkinter main loop to display the window
-  root.mainloop()
+#left button press
+#mdm.stop()
+#mdm.left()
 
+#right button press
+#mdm.stop()
+#mdm.right()
 
+#reverse button press
+#mdm.stop()
+#mdm.backward()
 
-if __name__ == '__main__':
-  in_main_gui()
+#stop button press
+#mdm.stop()
+robot = Robot(left=(4, 14), right=(17, 27)) #This assigns the motor to its respective GPIO Pin
+robot.forward() #This moves the robot forward
+
 
