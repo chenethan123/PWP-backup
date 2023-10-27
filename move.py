@@ -45,3 +45,5 @@ move_forward(50, 3)
 
 # Cleanup GPIO
 GPIO.cleanup()
+
+print("ended")
