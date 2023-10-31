@@ -4,7 +4,7 @@ kit=MotorKit(0x40)
 import time
 
 #forward
-kit.motor1.throttle=0.85
+kit.motor1.throttle=0.845
 kit.motor2.throttle=-0.85
 #wait to stop motors to allow for forward movement
 time.sleep(4.4)
