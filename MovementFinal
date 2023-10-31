@@ -1,0 +1,13 @@
+#Importation of necessary libraries and general setup
+from adafruit_motorkit import MotorKit
+kit=MotorKit(0x40)
+import time
+
+#forward
+kit.motor1.throttle=0.85
+kit.motor2.throttle=-0.85
+#wait to stop motors to allow for forward movement
+time.sleep(4.4)
+#stop motors in preparation for next step
+kit.motor1.throttle=0.0
+kit.motor2.throttle=0.0
