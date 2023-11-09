@@ -38,7 +38,7 @@ def index():
 
 @app.route('/move', methods=['POST'])
 def control():
-    command = request.json['command']
+    command = request.json[command]
     if command == 'forward':
         forward()
     elif command == 'backward':
@@ -61,6 +61,7 @@ def forward():
 
 
 def backward():
+    print("Move backward")
     kit.motor1.throttle = -0.8
     kit.motor2.throttle = 0.8
 
