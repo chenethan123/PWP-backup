@@ -55,6 +55,7 @@ def control():
     return jsonify({'status': 'success', 'message': 'Command executed'})
 
 def forward():
+  print("Move forward")
   kit.motor1.throttle=0.8
   kit.motor2.throttle=-0.8
 
