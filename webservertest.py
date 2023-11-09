@@ -85,4 +85,4 @@ def stop():
     kit.motor2.throttle = 0.0
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0')
