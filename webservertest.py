@@ -6,39 +6,12 @@ import requests
 kit = MotorKit(0x40)
 app = Flask(__name__)
 
-# @app.route('/')
-# def index():
-#     return '''
-#     <html>
-#     <body>
-#         <h1>Robot Control</h1>
-#         <button onclick="sendCommand('forward')">Forward</button>
-#         <button onclick="sendCommand('backward')">Backward</button>
-#         <button onclick="sendCommand('left')">Left</button>
-#         <button onclick="sendCommand('right')">Right</button>
-#         <button onclick="sendCommand('stop')">Stop</button>
-
-#         <script>
-#         function sendCommand(command) {
-#             fetch('/control', {
-#                 method: 'POST',
-#                 headers: {
-#                     'Content-Type': 'application/json'
-#                 },
-#                 body: JSON.stringify({ 'command': command })
-#             })
-#             .then(response => response.json())
-#             .then(data => console.log(data))
-#             .catch(error => console.error('Error:', error));
-#         }
-#         </script>
-#     </body>
-#     </html>
-#     '''
-
 @app.route('/', methods=['POST'])
 def control():
-    command = request.json[command]
+    try:
+        command = request.json['command']
+    except KeyError:
+        return jsonify({'status': 'error', 'message': 'Command not provided'})
     if command == 'forward':
         forward()
     elif command == 'backward':
@@ -53,6 +26,7 @@ def control():
         return jsonify({'status': 'error', 'message': 'Invalid command'})
 
     return jsonify({'status': 'success', 'message': 'Command executed'})
+
 
 def forward():
   print("Move forward")
