@@ -1,14 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify #Import all necessary files
 from adafruit_motorkit import MotorKit
 import time
 import requests
 
 kit = MotorKit(0x40)
-app = Flask(__name__)
+app = Flask(__name__) #Create the flask server
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['POST'])  #This function recieves the method from the Computer.
 def control():
-    try:
+    try:   #Test whether or not the function was even recieved (debugging purposes)
         command = request.json['command']
     except KeyError:
         return jsonify({'status': 'error', 'message': 'Command not provided'})
@@ -27,7 +27,7 @@ def control():
 
     return jsonify({'status': 'success', 'message': 'Command executed'})
 
-
+#These just move the motors.
 def forward():
   print("Move forward")
   kit.motor1.throttle=0.8
