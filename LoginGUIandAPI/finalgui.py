@@ -1,62 +1,49 @@
-#for when entering the password. hashing will encrypt the password in the sql database
-import hashlib
-
-#for file paths
-import os
-
-#imports sqlite3, which will be used to create a sql database
-import sqlite3
-
-#imports all of the required tkinter libraries
+# imports all required tkinter libraries
 from tkinter import *
+import tkinter as tk
 root = Tk()
 from tkinter import ttk
 from tkinter import messagebox
-import tkinter as tk
-
+import requests
 # creates the tk gui
 root.geometry()
-root.geometry("510x1020")
-root.title("Choose")
+root.geometry("510x510")
+root.title("Control")
 
-#function that will open up the sign in page
-def openSignUpPage():
-  root.destroy()
-  import signup
+def movement(direction):
+  url = "http://192.168.1.25:5000"
+  requests.post(url, json={'command': direction})
 
+      
 
-#function that will open up the log in page
-def openLogInPage():
-  root.destroy()
-  import login
-
-#creates a login button and sets up their location. The login button runs a function to open up the login screen.
-login_button = Button(root, text="Login", command=openLogInPage)
-login_button.grid(row=0,column=0)
-#creates a signup button and sets up their location. The signup button runs a function to open up the signup screen.
-signup_button = Button(root, text="Create Account", command=openSignUpPage)
-signup_button.grid(row=1,column=0)
-#creates an exit button that will destroy the gui. This will end the program.
-enter_button = Button(root, text="Exit", command=root.destroy)
-enter_button.grid(row=2,column=0)
-
-# sets up the actual sqlite databse as login.db
-database = sqlite3.connect('login.db')
-
-# creates the cursor object which is importing in interacting with the database.
-cursor = database.cursor()
-
-# create the database with the different columns required. This is only if the database doesn't exist.
-cursor.execute(''' CREATE TABLE IF NOT EXISTS logindata
-       (userid     INTEGER PRIMARY KEY, 
-       username TEXT,
-       password TEXT,
-       first_name TEXT,
-       last_name TEXT)
-       ''')
-
-#applies all changes to the database
-database.commit()
-
-# keeps the gui from disappearing/keeps it on screen
-root.mainloop()
+#creates the gui for the future
+def createGUI(user_firstname):
+    #a label for the video
+    vidlabel = Label(root, text="Video")
+    vidlabel.grid(row=0, column=0)
+    # the actual video
+    video = tk.Canvas(root, width=200, height =200,background='black')
+    video.grid(row=1,column=0)
+    # a label stating if there is feed
+    feedlabel = Label(root, text="No Feed")
+    feedlabel.grid(row=2, column=0)
+    # a button for moving forward
+    forwardbutton = Button(root, text="Forward", command = lambda:movement("forward"))
+    forwardbutton.grid(row=1,column=6)
+    # a button for moving backward
+    backbutton = Button(root, text="Backward",command = lambda:movement("backward"))
+    backbutton.grid(row=1,column=7)
+    # a button for turning right
+    rightbutton = Button(root, text="Right",command = lambda:movement("right"))
+    rightbutton.grid(row=1,column=8)
+    # a button for turning left
+    leftbutton = Button(root, text="Left",command = lambda:movement("left"))
+    leftbutton.grid(row=1,column=9)
+    # a button for stopping
+    stopbutton = Button(root, text="Stop",command = lambda:movement("stop"))
+    stopbutton.grid(row=2,column=6)
+    # a button for logging out
+    logout = Button(root, text="Logout", command=root.destroy)
+    logout.grid(row=2,column=7)
+    # displays a message saying "Welcome," username
+    messagebox.showinfo("Logged in!", "Welcome, " + user_firstname)
