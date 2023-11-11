@@ -10,6 +10,7 @@ root.geometry()
 root.geometry("510x510")
 root.title("Control")
 
+#This sends the functions to the assigned URL using requests and the POST function
 def movement(direction):
   url = "http://192.168.1.25:5000"
   requests.post(url, json={'command': direction})
