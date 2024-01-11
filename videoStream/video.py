@@ -12,16 +12,20 @@ def render_template():
 
   <body>
     <h1>Live streaming</h1>
-    <div>
+<p>
+   <center>
+       <button onclick="window.location.href = '/video';">Video Stream</button>
+   </center>
+   </p>
 
-        <img src="{{ url_for('video') }}" width="50%"/>
-    </div>
-            
+
     </body>
 
 
 </html>'''
     return indexHTML
+
+
 def generate_frames():
     while True:
 
@@ -48,4 +52,4 @@ def video():
 
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0', port=4444, debug=True)
+    app.run(host='0.0.0.0', port=4444, debug=True)
