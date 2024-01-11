@@ -5,6 +5,23 @@ app = Flask(__name__)
 camera = cv2.VideoCapture(0)
 
 
+def render_template():
+    indexHTML = '''<!DOCTYPE html>
+<html>
+
+
+  <body>
+    <h1>Live streaming</h1>
+    <div>
+
+        <img src="{{ url_for('video') }}" width="50%"/>
+    </div>
+            
+    </body>
+
+
+</html>'''
+    return indexHTML
 def generate_frames():
     while True:
 
@@ -22,7 +39,7 @@ def generate_frames():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template()
 
 
 @app.route('/video')
@@ -30,5 +47,5 @@ def video():
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-if __name__ == '__main__':
-   app.run(host='0.0.0.0', port=4444, debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
