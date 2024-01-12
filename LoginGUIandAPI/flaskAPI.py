@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify #Import all necessary files
 from adafruit_motorkit import MotorKit
-import time
 import requests
 
 kit = MotorKit(0x40)
@@ -43,7 +42,6 @@ def backward():
 def left(time):
     kit.motor1.throttle=-0.8
     kit.motor2.throttle=-0.8
-    time.sleep(time)
     kit.motor1.throttle = 0.0
     kit.motor2.throttle = 0.0
   
@@ -51,7 +49,6 @@ def left(time):
 def right(time):
     kit.motor1.throttle=0.8
     kit.motor2.throttle=0.8
-    time.sleep(time)
     kit.motor1.throttle = 0.0
     kit.motor2.throttle = 0.0
 
@@ -60,4 +57,4 @@ def stop():
     kit.motor2.throttle = 0.0
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000, debug=True)
